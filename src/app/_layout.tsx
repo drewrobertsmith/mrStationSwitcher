@@ -8,6 +8,9 @@ import {
 import { withLayoutContext } from "expo-router";
 import { ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { Platform } from "react-native";
+import { TabBarHeightProvider } from "@/providers/tabBarHeight-provider";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import HeightAwareTabBar from "@/components/ui/heightAware-tabBar";
 
 const BottomTabNavigator = createNativeBottomTabNavigator().Navigator;
 
@@ -20,27 +23,36 @@ const Tabs = withLayoutContext<
 
 export default function RootLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Stations",
-          tabBarIcon: () =>
-            Platform.OS === "ios"
-              ? { sfSymbol: "antenna.radiowaves.left.and.right" }
-              : require("../../assets/icons/radio-tower-1019-svgrepo-com.svg"),
-        }}
-      />
-      <Tabs.Screen
-        name="programs"
-        options={{
-          title: "Programs",
-          tabBarIcon: () =>
-            Platform.OS === "ios"
-              ? { sfSymbol: "mic.fill" }
-              : require("../../assets/icons/microphone-934-svgrepo-com.svg"),
-        }}
-      />
-    </Tabs>
+    <TabBarHeightProvider>
+      <Tabs
+        tabBar={(props: BottomTabBarProps) => <HeightAwareTabBar {...props} />}
+        minimizeBehavior="onScrollDown"
+        renderBottomAccessoryView={({ placement }) => (
+          <MiniPlayer placement={placement} />
+        )}
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "Stations",
+            tabBarIcon: () =>
+              Platform.OS === "ios"
+                ? { sfSymbol: "antenna.radiowaves.left.and.right" }
+                : require("../../assets/icons/radio-tower-1019-svgrepo-com.svg"),
+          }}
+        />
+        <Tabs.Screen
+          name="programs"
+          options={{
+            title: "Programs",
+            tabBarIcon: () =>
+              Platform.OS === "ios"
+                ? { sfSymbol: "mic.fill" }
+                : require("../../assets/icons/microphone-934-svgrepo-com.svg"),
+          }}
+        />
+      </Tabs>
+      {Platform.OS === "android" ? <MiniPlayer /> : null}
+    </TabBarHeightProvider>
   );
 }
