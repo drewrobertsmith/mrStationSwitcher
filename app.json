@@ -8,7 +8,14 @@
     "scheme": "mrstationswitcher",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio",
+          "audio"
+        ]
+      },
+      "bundleIdentifier": "com.mediated-reality.mrStationSwitcher"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,7 +25,12 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.mediated_reality.mrStationSwitcher"
     },
     "web": {
       "output": "static",
@@ -35,7 +47,11 @@
             "imageWidth": 76
           }
         }
-      ]
+      ],
+      "react-native-bottom-tabs",
+      "expo-audio",
+      "@rnrepo/expo-config-plugin",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,

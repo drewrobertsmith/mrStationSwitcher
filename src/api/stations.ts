@@ -36,10 +36,10 @@ export const STATION_DATA: Station[] = [
   },
   {
     tritonId: "WMBIAM",
-    name: "Radio Moody (Español)",
+    name: "Radio Moody",
     callLetters: "rdmd",
     logo: "https://moodybible.canto.com/direct/image/vvhu0b6cf120n319ctrh33fo5t/IlGBC2vdcUA_FoDVss5M8KnddiE/original?content-type=image%2Fpng&name=Radio+Moody.png",
-    backgroundColor: "#799b3d",
+    backgroundColor: "#d19000",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WMBIAMAAC.aac",
     fallbackstream:
