@@ -1,5 +1,4 @@
 import { MiniPlayer } from "@/components/miniplayer";
-import { NativeTabs } from "expo-router/unstable-native-tabs";
 import {
   createNativeBottomTabNavigator,
   NativeBottomTabNavigationOptions,
@@ -9,12 +8,11 @@ import { withLayoutContext } from "expo-router";
 import { ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { Platform } from "react-native";
 import { TabBarHeightProvider } from "@/providers/tabBarHeight-provider";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import HeightAwareTabBar from "@/components/ui/heightAware-tabBar";
+import { AudioProvider } from "@/providers/audio-provider";
 
 const BottomTabNavigator = createNativeBottomTabNavigator().Navigator;
 
-const Tabs = withLayoutContext<
+export const Tabs = withLayoutContext<
   NativeBottomTabNavigationOptions,
   typeof BottomTabNavigator,
   TabNavigationState<ParamListBase>,
@@ -23,36 +21,40 @@ const Tabs = withLayoutContext<
 
 export default function RootLayout() {
   return (
-    <TabBarHeightProvider>
-      <Tabs
-        // tabBar={(props: BottomTabBarProps) => <HeightAwareTabBar {...props} />}
-        minimizeBehavior="onScrollDown"
-        renderBottomAccessoryView={({ placement }) => (
-          <MiniPlayer placement={placement} />
-        )}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: "Stations",
-            tabBarIcon: () =>
-              Platform.OS === "ios"
-                ? { sfSymbol: "antenna.radiowaves.left.and.right" }
-                : require("../../assets/icons/radio-tower-1019-svgrepo-com.svg"),
+    <AudioProvider>
+      <TabBarHeightProvider>
+        <Tabs
+          minimizeBehavior="onScrollDown"
+          renderBottomAccessoryView={({ placement }) => (
+            <MiniPlayer placement={placement} />
+          )}
+          tabBarStyle={{
+            backgroundColor: "transparent",
           }}
-        />
-        <Tabs.Screen
-          name="programs"
-          options={{
-            title: "Programs",
-            tabBarIcon: () =>
-              Platform.OS === "ios"
-                ? { sfSymbol: "mic.fill" }
-                : require("../../assets/icons/microphone-934-svgrepo-com.svg"),
-          }}
-        />
-      </Tabs>
-      {Platform.OS === "android" ? <MiniPlayer /> : null}
-    </TabBarHeightProvider>
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: "Stations",
+              tabBarIcon: () =>
+                Platform.OS === "ios"
+                  ? { sfSymbol: "antenna.radiowaves.left.and.right" }
+                  : require("../../assets/icons/radio-tower-1019-svgrepo-com.svg"),
+            }}
+          />
+          <Tabs.Screen
+            name="programs"
+            options={{
+              title: "Programs",
+              tabBarIcon: () =>
+                Platform.OS === "ios"
+                  ? { sfSymbol: "mic.fill" }
+                  : require("../../assets/icons/microphone-934-svgrepo-com.svg"),
+            }}
+          />
+        </Tabs>
+        {Platform.OS === "android" ? <MiniPlayer /> : null}
+      </TabBarHeightProvider>
+    </AudioProvider>
   );
 }

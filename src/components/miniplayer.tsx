@@ -1,7 +1,8 @@
-import { useTabBarHeight } from "@/providers/tabBarHeight-provider";
+import { useAudio } from "@/providers/audio-provider";
 import { Station } from "@/types/types";
-import { NativeTabs } from "expo-router/unstable-native-tabs";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Image } from "expo-image";
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 type MiniPlayerProps = {
   activeStation?: Station | null;
@@ -11,9 +12,13 @@ type MiniPlayerProps = {
 const MINI_PLAYER_HEIGHT = 64;
 
 export function MiniPlayer({ activeStation, placement }: MiniPlayerProps) {
-  const { tabBarHeight } = useTabBarHeight();
   const isAndroid = Platform.OS === "android";
   const isInline = placement === "inline";
+  const { currentTrack, status, player } = useAudio();
+
+  const playPauseToggle = () => {
+    return status.playing ? player.pause() : player.play();
+  };
 
   return (
     <View
@@ -27,16 +32,40 @@ export function MiniPlayer({ activeStation, placement }: MiniPlayerProps) {
           borderWidth: 1,
           borderRadius: 8,
           justifyContent: "center",
-          alignItems: "center",
         },
         !isAndroid && {
-          justifyContent: "center",
           flex: 1,
-          alignItems: "center",
+          justifyContent: "center",
         },
       ]}
     >
-      <Text>{isInline ? "Mini" : "Now Playing - Full Width"}</Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: 8,
+        }}
+      >
+        <Image
+          style={{ width: 40, aspectRatio: "1", borderRadius: 8 }}
+          source={currentTrack ? currentTrack?.artwork : null}
+          contentFit="contain"
+        />
+        <Text>{currentTrack ? currentTrack?.title : "Moody Radio"}</Text>
+        <Pressable
+          hitSlop={12}
+          onPress={() => {
+            playPauseToggle();
+          }}
+        >
+          <FontAwesome5
+            name={status.playing ? "stop" : "play"}
+            size={32}
+            color="black"
+          />
+        </Pressable>
+      </View>
     </View>
   );
 }

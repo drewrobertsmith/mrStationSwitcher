@@ -1,22 +1,22 @@
+import { Track, useAudio } from "@/providers/audio-provider";
 import { Station } from "@/types/types";
 import React, { SetStateAction } from "react";
 import { Pressable, Text, View } from "react-native";
 
 type StationItemType = {
   item: Station;
-  activeStation: Station | null;
-  setActiveStation: React.Dispatch<SetStateAction<Station>>;
 };
 
-export default function StationItem({
-  item,
-  activeStation,
-  setActiveStation,
-}: StationItemType) {
+export default function StationItem({ item }: StationItemType) {
+  const { play, pause, currentTrack } = useAudio();
+
   return (
     <Pressable
       onPress={() => {
-        setActiveStation(item);
+        play(item);
+      }}
+      onLongPress={() => {
+        pause();
       }}
     >
       <View
@@ -29,8 +29,7 @@ export default function StationItem({
             {
               fontSize: 48,
               fontWeight: "600",
-              color:
-                activeStation?.tritonId === item.tritonId ? "#ffffff" : "black",
+              color: currentTrack?.id === item.tritonId ? "#ffffff" : "black",
             },
           ]}
         >
