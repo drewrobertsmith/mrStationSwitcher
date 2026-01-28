@@ -25,7 +25,7 @@ export default function RootLayout() {
   return (
     <TabBarHeightProvider>
       <Tabs
-        tabBar={(props: BottomTabBarProps) => <HeightAwareTabBar {...props} />}
+        // tabBar={(props: BottomTabBarProps) => <HeightAwareTabBar {...props} />}
         minimizeBehavior="onScrollDown"
         renderBottomAccessoryView={({ placement }) => (
           <MiniPlayer placement={placement} />

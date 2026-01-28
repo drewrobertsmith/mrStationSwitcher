@@ -23,7 +23,7 @@ export function MiniPlayer({ activeStation, placement }: MiniPlayerProps) {
           height: MINI_PLAYER_HEIGHT,
           left: 8,
           right: 8,
-          bottom: tabBarHeight + 8,
+          bottom: 104 + 8, //I dislike this hardcoded 104, but for now it functions
           borderWidth: 1,
           borderRadius: 8,
           justifyContent: "center",
