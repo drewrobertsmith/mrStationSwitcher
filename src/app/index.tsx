@@ -15,7 +15,9 @@ export default function Index() {
     <View
       style={{
         flex: 1,
-        backgroundColor: currentTrack ? currentTrack.accentColor : "#ffffff",
+        backgroundColor: currentTrack
+          ? currentTrack.backgroundColor
+          : "#ffffff",
         padding: 4,
         marginTop: inset.top,
       }}

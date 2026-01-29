@@ -7,6 +7,7 @@ export const STATION_DATA: Station[] = [
     callLetters: "PRWR",
     logo: "https://moodybible.canto.com/direct/image/42dfm4inb554r66omev6n8ni2s/q8R_QU4QyIxuAgphI-6QlCdxyEg/original?content-type=image%2Fpng&name=Praise+and+Worship.png",
     backgroundColor: "#46a147",
+    accentColor: "#9E915D",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/IM_1AAC.aac",
     fallbackstream:
@@ -18,6 +19,7 @@ export const STATION_DATA: Station[] = [
     callLetters: "MJST",
     logo: "https://moodybible.canto.com/direct/image/08s24giflh6b9dbauumhrfv01r/n1CNUtGjxSFMyNIqIZtUQgPdjY4/original?content-type=image%2Fjpeg&name=Majesty_1400x1400.jpg",
     backgroundColor: "#66bac4",
+    accentColor: "#415FA1",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/IM_2AAC.aac",
     fallbackstream:
@@ -29,6 +31,7 @@ export const STATION_DATA: Station[] = [
     callLetters: "URPR",
     logo: "https://moodybible.canto.com/direct/image/8e6v64b22h2er3ih0jku5pe942/_KQGQ4Q9xTwuUZTi5Rjwodl0XJU/original?content-type=image%2Fpng&name=Urban+Praise.png",
     backgroundColor: "#a84e20",
+    accentColor: "#694F40",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/IM_3AAC.aac",
     fallbackstream:
@@ -40,6 +43,7 @@ export const STATION_DATA: Station[] = [
     callLetters: "rdmd",
     logo: "https://moodybible.canto.com/direct/image/vvhu0b6cf120n319ctrh33fo5t/IlGBC2vdcUA_FoDVss5M8KnddiE/original?content-type=image%2Fpng&name=Radio+Moody.png",
     backgroundColor: "#d19000",
+    accentColor: "#003B5C",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WMBIAMAAC.aac",
     fallbackstream:
@@ -51,6 +55,7 @@ export const STATION_DATA: Station[] = [
     callLetters: "MDRN",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     backgroundColor: "#799b3d",
+    accentColor: "#003B5C",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2AAC.aac",
     fallbackstream:

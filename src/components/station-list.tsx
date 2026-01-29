@@ -1,8 +1,7 @@
 import { Station } from "@/types/types";
 import React, { SetStateAction } from "react";
-import { FlatList } from "react-native";
 import StationItem from "./station-item";
-import { Track } from "@/providers/audio-provider";
+import { LegendList } from "@legendapp/list";
 
 type StationListType = {
   data: Station[];
@@ -10,7 +9,7 @@ type StationListType = {
 
 export default function StationList({ data }: StationListType) {
   return (
-    <FlatList
+    <LegendList
       data={data}
       keyExtractor={(item) => item.tritonId}
       renderItem={({ item }) => <StationItem item={item} />}

@@ -13,7 +13,6 @@ const MINI_PLAYER_HEIGHT = 64;
 
 export function MiniPlayer({ activeStation, placement }: MiniPlayerProps) {
   const isAndroid = Platform.OS === "android";
-  const isInline = placement === "inline";
   const { currentTrack, status, player } = useAudio();
 
   const playPauseToggle = () => {
@@ -35,7 +34,6 @@ export function MiniPlayer({ activeStation, placement }: MiniPlayerProps) {
         },
         !isAndroid && {
           flex: 1,
-          justifyContent: "center",
         },
       ]}
     >
@@ -48,21 +46,21 @@ export function MiniPlayer({ activeStation, placement }: MiniPlayerProps) {
         }}
       >
         <Image
-          style={{ width: 40, aspectRatio: "1", borderRadius: 8 }}
+          style={{ height: "100%", aspectRatio: "1", borderRadius: 8 }}
           source={currentTrack ? currentTrack?.artwork : null}
           contentFit="contain"
         />
         <Text>{currentTrack ? currentTrack?.title : "Moody Radio"}</Text>
         <Pressable
-          hitSlop={12}
+          hitSlop={14}
           onPress={() => {
             playPauseToggle();
           }}
         >
           <FontAwesome5
             name={status.playing ? "stop" : "play"}
-            size={32}
-            color="black"
+            size={30}
+            color={currentTrack ? currentTrack.accentColor : "black"}
           />
         </Pressable>
       </View>

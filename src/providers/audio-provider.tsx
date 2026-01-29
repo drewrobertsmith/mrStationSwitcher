@@ -16,6 +16,7 @@ export interface Track {
   artwork: string;
   isLiveStream: boolean;
   accentColor: ColorValue;
+  backgroundColor: ColorValue;
 }
 
 interface AudioProviderType {
@@ -41,7 +42,8 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
       artist: item.callLetters,
       artwork: item.logo,
       isLiveStream: true,
-      accentColor: item.backgroundColor,
+      backgroundColor: item.backgroundColor,
+      accentColor: item.accentColor,
     };
   };
 
