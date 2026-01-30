@@ -7,12 +7,12 @@ import {
   NativeBottomTabNavigationOptions,
   NativeBottomTabNavigationEventMap,
 } from "@bottom-tabs/react-navigation";
-import { useResolveClassNames } from "uniwind";
 import { withLayoutContext } from "expo-router";
 import { ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { Platform } from "react-native";
 import { TabBarHeightProvider } from "@/providers/tabBarHeight-provider";
 import { AudioProvider } from "@/providers/audio-provider";
+import { ThemeProvider, useTheme } from "@/providers/theme-provider";
 import { StatusBar } from "expo-status-bar";
 import "../global.css";
 
@@ -26,16 +26,18 @@ export const Tabs = withLayoutContext<
 >(BottomTabNavigator);
 
 function TabLayout() {
-  const tabStyle = useResolveClassNames("bg-background-dark");
-  const headerStyle = useResolveClassNames("bg-background-dark");
+  const { colors } = useTheme();
 
   return (
     <TabBarHeightProvider>
       <Tabs
         minimizeBehavior="onScrollDown"
         renderBottomAccessoryView={() => <InlineMiniPlayer />}
+        tabBarActiveTintColor={colors.accent}
+        activeIndicatorColor={colors.background}
+        tabBarStyle={{ backgroundColor: colors.surface }}
         screenOptions={{
-          sceneStyle: headerStyle,
+          sceneStyle: { backgroundColor: colors.background },
         }}
       >
         <Tabs.Screen
@@ -79,7 +81,9 @@ function TabLayout() {
 export default function RootLayout() {
   return (
     <AudioProvider>
-      <TabLayout />
+      <ThemeProvider>
+        <TabLayout />
+      </ThemeProvider>
     </AudioProvider>
   );
 }

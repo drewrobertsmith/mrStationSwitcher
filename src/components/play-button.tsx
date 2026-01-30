@@ -1,12 +1,11 @@
 import { useAudio } from "@/providers/audio-provider";
+import { useTheme } from "@/providers/theme-provider";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Pressable } from "react-native";
-import { withUniwind } from "uniwind";
 
 export function PlayButton() {
-  const StyledIcon = withUniwind(FontAwesome5);
-
   const { state, actions } = useAudio();
+  const { colors } = useTheme();
 
   const playPauseToggle = () => {
     return state.isPlaying ? actions.pause() : actions.resume();
@@ -19,10 +18,10 @@ export function PlayButton() {
         playPauseToggle();
       }}
     >
-      <StyledIcon
-        className="text-primary"
+      <FontAwesome5
         name={state.isPlaying ? "stop" : "play"}
         size={30}
+        color={state.currentTrack ? colors.accent : colors.text}
       />
     </Pressable>
   );

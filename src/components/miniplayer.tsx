@@ -1,4 +1,5 @@
 import { useAudio } from "@/providers/audio-provider";
+import { useTheme } from "@/providers/theme-provider";
 import { Image } from "expo-image";
 import { View, Text } from "react-native";
 import { PlayButton } from "./play-button";
@@ -10,7 +11,7 @@ function MiniPlayerContent() {
   const { currentTrack } = state;
 
   return (
-    <View className="flex-row items-center justify-between p-2">
+    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 8 }}>
       <Image
         style={{ height: "100%", aspectRatio: "1", borderRadius: 8 }}
         source={currentTrack ? currentTrack.artwork : null}
@@ -25,17 +26,20 @@ function MiniPlayerContent() {
 }
 
 export function InlineMiniPlayer() {
+  const { colors } = useTheme();
+
   return (
-    <View className="flex-1 bg-background-light border-border">
+    <View style={{ flex: 1, backgroundColor: colors.surface }}>
       <MiniPlayerContent />
     </View>
   );
 }
 
 export function FloatingMiniPlayer() {
+  const { colors } = useTheme();
+
   return (
     <View
-      className="bg-background-light border-border"
       style={{
         position: "absolute",
         height: MINI_PLAYER_HEIGHT,
@@ -44,7 +48,9 @@ export function FloatingMiniPlayer() {
         bottom: 104 + 8, //I dislike this hardcoded 104, but for now it functions
         borderWidth: 1,
         borderRadius: 8,
+        borderColor: "hsla(0, 0%, 50%, 0.3)",
         justifyContent: "center",
+        backgroundColor: colors.surface,
       }}
     >
       <MiniPlayerContent />
