@@ -8,7 +8,7 @@ export function PlayButton() {
   const { colors } = useTheme();
 
   const iconColor = state.currentTrack ? colors.accent : colors.text;
-  const isLoading = state.isBuffering && !state.isPlaying;
+  const isLoading = state.isBuffering && !state.isPlaying && !!state.currentTrack;
 
   const playPauseToggle = () => {
     return state.isPlaying ? actions.pause() : actions.resume();
