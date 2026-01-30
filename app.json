@@ -11,7 +11,6 @@
       "icon": "./assets/expo.icon",
       "infoPlist": {
         "UIBackgroundModes": [
-          "audio",
           "audio"
         ]
       },
