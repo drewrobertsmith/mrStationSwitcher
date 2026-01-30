@@ -1,14 +1,20 @@
-import { MiniPlayer } from "@/components/miniplayer";
+import {
+  InlineMiniPlayer,
+  FloatingMiniPlayer,
+} from "@/components/miniplayer";
 import {
   createNativeBottomTabNavigator,
   NativeBottomTabNavigationOptions,
   NativeBottomTabNavigationEventMap,
 } from "@bottom-tabs/react-navigation";
+import { useResolveClassNames } from "uniwind";
 import { withLayoutContext } from "expo-router";
 import { ParamListBase, TabNavigationState } from "@react-navigation/native";
 import { Platform } from "react-native";
 import { TabBarHeightProvider } from "@/providers/tabBarHeight-provider";
-import { AudioProvider, useAudio } from "@/providers/audio-provider";
+import { AudioProvider } from "@/providers/audio-provider";
+import { StatusBar } from "expo-status-bar";
+import "../global.css";
 
 const BottomTabNavigator = createNativeBottomTabNavigator().Navigator;
 
@@ -20,21 +26,17 @@ export const Tabs = withLayoutContext<
 >(BottomTabNavigator);
 
 function TabLayout() {
-  const { currentTrack } = useAudio();
+  const tabStyle = useResolveClassNames("bg-background-dark");
+  const headerStyle = useResolveClassNames("bg-background-dark");
 
   return (
     <TabBarHeightProvider>
       <Tabs
         minimizeBehavior="onScrollDown"
-        renderBottomAccessoryView={({ placement }) => (
-          <MiniPlayer placement={placement} />
-        )}
-        tabBarActiveTintColor={
-          currentTrack ? currentTrack?.accentColor : undefined
-        }
-        tabBarInactiveTintColor={
-          currentTrack ? currentTrack?.accentColor : undefined
-        }
+        renderBottomAccessoryView={() => <InlineMiniPlayer />}
+        screenOptions={{
+          sceneStyle: headerStyle,
+        }}
       >
         <Tabs.Screen
           name="index"
@@ -68,7 +70,8 @@ function TabLayout() {
           }}
         />
       </Tabs>
-      {Platform.OS === "android" ? <MiniPlayer /> : null}
+      <StatusBar style="auto" />
+      {Platform.OS === "android" ? <FloatingMiniPlayer /> : null}
     </TabBarHeightProvider>
   );
 }

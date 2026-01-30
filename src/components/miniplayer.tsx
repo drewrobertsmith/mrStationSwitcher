@@ -1,69 +1,53 @@
 import { useAudio } from "@/providers/audio-provider";
-import { Station } from "@/types/types";
 import { Image } from "expo-image";
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-
-type MiniPlayerProps = {
-  activeStation?: Station | null;
-  placement?: "inline" | "expanded" | "none";
-};
+import { View, Text } from "react-native";
+import { PlayButton } from "./play-button";
 
 const MINI_PLAYER_HEIGHT = 64;
 
-export function MiniPlayer({ activeStation, placement }: MiniPlayerProps) {
-  const isAndroid = Platform.OS === "android";
-  const { currentTrack, status, player } = useAudio();
-
-  const playPauseToggle = () => {
-    return status.playing ? player.pause() : player.play();
-  };
+function MiniPlayerContent() {
+  const { state } = useAudio();
+  const { currentTrack } = state;
 
   return (
+    <View className="flex-row items-center justify-between p-2">
+      <Image
+        style={{ height: "100%", aspectRatio: "1", borderRadius: 8 }}
+        source={currentTrack ? currentTrack.artwork : null}
+        contentFit="contain"
+      />
+      <Text className="text-primary text-base">
+        {currentTrack ? currentTrack.title : "Moody Radio"}
+      </Text>
+      <PlayButton />
+    </View>
+  );
+}
+
+export function InlineMiniPlayer() {
+  return (
+    <View className="flex-1 bg-background-light border-border">
+      <MiniPlayerContent />
+    </View>
+  );
+}
+
+export function FloatingMiniPlayer() {
+  return (
     <View
-      style={[
-        isAndroid && {
-          position: "absolute",
-          height: MINI_PLAYER_HEIGHT,
-          left: 8,
-          right: 8,
-          bottom: 104 + 8, //I dislike this hardcoded 104, but for now it functions
-          borderWidth: 1,
-          borderRadius: 8,
-          justifyContent: "center",
-        },
-        !isAndroid && {
-          flex: 1,
-        },
-      ]}
+      className="bg-background-light border-border"
+      style={{
+        position: "absolute",
+        height: MINI_PLAYER_HEIGHT,
+        left: 8,
+        right: 8,
+        bottom: 104 + 8, //I dislike this hardcoded 104, but for now it functions
+        borderWidth: 1,
+        borderRadius: 8,
+        justifyContent: "center",
+      }}
     >
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: 8,
-        }}
-      >
-        <Image
-          style={{ height: "100%", aspectRatio: "1", borderRadius: 8 }}
-          source={currentTrack ? currentTrack?.artwork : null}
-          contentFit="contain"
-        />
-        <Text>{currentTrack ? currentTrack?.title : "Moody Radio"}</Text>
-        <Pressable
-          hitSlop={14}
-          onPress={() => {
-            playPauseToggle();
-          }}
-        >
-          <FontAwesome5
-            name={status.playing ? "stop" : "play"}
-            size={30}
-            color={currentTrack ? currentTrack.accentColor : "black"}
-          />
-        </Pressable>
-      </View>
+      <MiniPlayerContent />
     </View>
   );
 }

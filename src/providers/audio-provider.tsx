@@ -19,15 +19,29 @@ export interface Track {
   backgroundColor: ColorValue;
 }
 
-interface AudioProviderType {
-  player: AudioPlayer;
-  status: AudioStatus;
-  play: (item: Station) => void;
-  pause: () => void;
+interface AudioState {
   currentTrack: Track | null;
+  isPlaying: boolean;
 }
 
-const Audio = createContext<AudioProviderType | null>(null);
+interface AudioActions {
+  play: (station: Station) => void;
+  pause: () => void;
+  resume: () => void;
+}
+
+interface AudioMeta {
+  player: AudioPlayer;
+  status: AudioStatus;
+}
+
+interface AudioContextValue {
+  state: AudioState;
+  actions: AudioActions;
+  meta: AudioMeta;
+}
+
+const Audio = createContext<AudioContextValue | null>(null);
 
 export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
@@ -67,14 +81,26 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
     player.pause();
   };
 
+  const resume = () => {
+    player.play();
+  };
+
   return (
     <Audio.Provider
       value={{
-        player,
-        status,
-        play,
-        pause,
-        currentTrack,
+        state: {
+          currentTrack,
+          isPlaying: status.playing,
+        },
+        actions: {
+          play,
+          pause,
+          resume,
+        },
+        meta: {
+          player,
+          status,
+        },
       }}
     >
       {children}
