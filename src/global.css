@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "uniwind";
+
+@layer theme {
+  :root {
+    @variant dark {
+      /* Backgrounds */
+      --color-background-dark: hsl(0 0% 0%);
+      --color-background: hsl(0 0% 5%);
+      --color-background-light: hsl(0 0% 10%);
+
+      /* Text */
+      --color-primary: hsl(0 0 95%);
+      --color-primary-inverted: hsl(0 0% 5%);
+      --color-muted: hsl(0 0% 70%);
+      --color-muted-inverted: hsl(0 0% 30%);
+
+      /* Borders */
+      --color-border: hsl(0 0% 30%);
+
+      /* Primary Colors */
+      --color-primary-brand: hsl(6.92, 27.08%, 62.35%);
+      --color-secondary-brand: hsl(40.73, 70.32%, 69.61%);
+    }
+
+    @variant light {
+      /* Backgrounds */
+      --color-background-dark: hsl(0 0% 90%);
+      --color-background: hsl(0 0% 95%);
+      --color-background-light: hsl(0 0% 100%);
+
+      /* Text */
+      --color-primary: hsl(0 0% 5%);
+      --color-primary-inverted: hsl(0 0 95%);
+      --color-muted: hsl(0 0% 30%);
+      --color-muted-inverted: hsl(0 0% 70%);
+
+      /* Borders */
+      --color-border: hsl(0 0% 30%);
+
+      /* Primary Colors */
+      --color-primary-brand: hsl(6.92, 27.08%, 62.35%);
+      --color-secondary-brand: hsl(270, 14.86%, 29.02%);
+    }
+
+    /* Base configuration applies to all platforms */
+    --font-sans: "Inter";
+    --spacing-4: 16px;
+    --color-primary-light-default: hsl(0 0 95%);
+
+    /* iOS-specific overrides */
+    @media ios {
+      /* iOS prefers slightly larger text */
+
+      --font-sans: "-apple-system", "SF Pro Text";
+      --font-base: 17px;
+
+      /* iOS prefers more generous spacing */
+      --spacing-4: 20px;
+      --spacing-6: 28px;
+    }
+
+    @media android {
+      /* Material Design standard */
+      --font-sans: "Roboto";
+      --font-base: 14px;
+
+      /* Material Design spacing */
+      --spacing-4: 16px;
+      --spacing-6: 24px;
+    }
+
+    @media web {
+      --font-sans: "Inter", "system-ui", sans-serif;
+      --font-base: 16px;
+    }
+  }
+}
