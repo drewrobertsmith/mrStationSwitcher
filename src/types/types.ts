@@ -9,4 +9,6 @@ export interface Station {
   accentColor: ColorValue;
   stream: string;
   fallbackstream: string;
+  lat?: number;
+  lng?: number;
 }

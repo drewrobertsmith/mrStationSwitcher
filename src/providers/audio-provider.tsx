@@ -98,8 +98,7 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!currentTrack) return;
 
-    const isStalled =
-      status.isBuffering && !status.playing;
+    const isStalled = status.isBuffering && !status.playing;
 
     if (isStalled) {
       // Start stall timer if not already running

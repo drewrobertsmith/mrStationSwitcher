@@ -1,4 +1,4 @@
-import { STATION_DATA } from "@/api/stations";
+import { STATION_DATA } from "@/api/music-stations";
 import StationList from "@/components/station-list";
 import { useTheme } from "@/providers/theme-provider";
 import React from "react";
@@ -21,10 +21,7 @@ export default function Index() {
 
   return (
     <Animated.View
-      style={[
-        { flex: 1, padding: 4, marginTop: inset.top },
-        animatedStyle,
-      ]}
+      style={[{ flex: 1, padding: 4, marginTop: inset.top }, animatedStyle]}
     >
       <StationList data={STATIONS} />
     </Animated.View>

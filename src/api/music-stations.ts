@@ -50,15 +50,15 @@ export const STATION_DATA: Station[] = [
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WMBIAM.mp3",
   },
   {
-    tritonId: "MB2",
-    name: "Moody Radio Network",
-    callLetters: "MDRN",
-    logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
-    backgroundColor: "#799b3d",
-    accentColor: "#003B5C",
+    tritonId: "XNRD",
+    name: "XN Radio",
+    callLetters: "XNRD",
+    logo: "https://images.squarespace-cdn.com/content/v1/650bd7f5b98b404c93a1a2f4/19babc20-e727-43a1-9abe-4e2185265413/xn+radio.jpg",
+    backgroundColor: "#121013",
+    accentColor: "#B98B85",
     stream:
-      "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2AAC.aac",
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/XNRDAAC.aac",
     fallbackstream:
-      "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2.mp3",
+      "https://playerservices.streamtheworld.com/api/livestream-redirect/XNRD.mp3",
   },
 ];
