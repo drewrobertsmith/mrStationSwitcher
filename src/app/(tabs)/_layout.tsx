@@ -1,7 +1,4 @@
-import {
-  InlineMiniPlayer,
-  FloatingMiniPlayer,
-} from "@/components/miniplayer";
+import { InlineMiniPlayer, FloatingMiniPlayer } from "@/components/miniplayer";
 import {
   createNativeBottomTabNavigator,
   NativeBottomTabNavigationOptions,
@@ -56,17 +53,6 @@ export default function TabLayout() {
               Platform.OS === "ios"
                 ? { sfSymbol: "mic.fill" }
                 : require("../../../assets/icons/microphone-934-svgrepo-com.svg"),
-          }}
-        />
-        <Tabs.Screen
-          name="search"
-          options={{
-            title: "Search",
-            role: "search",
-            tabBarIcon: () =>
-              Platform.OS === "ios"
-                ? { sfSymbol: "magnifyingglass" }
-                : require("../../../assets/icons/search-left-1506-svgrepo-com.svg"),
           }}
         />
       </Tabs>
