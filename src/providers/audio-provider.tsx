@@ -13,6 +13,7 @@ import {
   useAudioPlayerStatus,
 } from "expo-audio";
 import { Station } from "@/types/types";
+import { stationToTrack } from "@/utils/station";
 import { ColorValue } from "react-native";
 
 export interface Track {
@@ -70,20 +71,6 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
       interruptionMode: "doNotMix",
     });
   }, []);
-
-  const stationToTrack = (item: Station): Track => {
-    return {
-      id: item.tritonId,
-      url: item.stream,
-      fallbackUrl: item.fallbackstream,
-      title: item.name,
-      artist: item.callLetters,
-      artwork: item.logo,
-      isLiveStream: true,
-      backgroundColor: item.backgroundColor,
-      accentColor: item.accentColor,
-    };
-  };
 
   // Update lock screen metadata (including artwork)
   useEffect(() => {
