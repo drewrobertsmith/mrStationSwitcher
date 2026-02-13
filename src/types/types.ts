@@ -2,6 +2,7 @@ import { ColorValue } from "react-native";
 
 export interface Station {
   tritonId: string;
+  frequency: string;
   name: string;
   callLetters: string;
   logo: string;

@@ -3,6 +3,7 @@ import { Station } from "@/types/types";
 export const LOCAL_STATION_DATA: Station[] = [
   {
     tritonId: "MB2",
+    frequency: "",
     name: "Moody Radio Network",
     callLetters: "MDRN",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
@@ -15,13 +16,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WCRFFM",
+    frequency: "103.3 FM",
+    name: "Cleveland",
     callLetters: "WCRF",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WCRFFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WCRFFM.mp3",
-    name: "103.3 FM - Cleveland",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 41.29679,
@@ -29,13 +31,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "KMBIFM",
+    frequency: "107.9 FM",
+    name: "Spokane",
     callLetters: "KMBI",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/KMBIFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/KMBIFM.mp3",
-    name: "107.9 FM - Spokane",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 47.57051,
@@ -43,13 +46,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WFCMFM",
+    frequency: "1200 AM",
+    name: "Nashville",
     callLetters: "WFCM",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WFCMFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WFCMFM.mp3",
-    name: "1200 AM - Nashville",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 36.208333,
@@ -57,13 +61,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WMBWFM",
+    frequency: "88.9 FM",
+    name: "Chattanooga",
     callLetters: "WMBW",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WMBWFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WMBWFM.mp3",
-    name: "88.9 FM - Chattanooga",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 34.96217,
@@ -71,13 +76,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "MB2",
+    frequency: "88.9 FM",
+    name: "Tuscaloosa/Birmingham",
     callLetters: "WMFT",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2AAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2.mp3",
-    name: "88.9 FM - Tuscaloosa/Birmingham",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 33.33871,
@@ -85,13 +91,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WDLMFM",
+    frequency: "89.3 FM",
+    name: "East Moline",
     callLetters: "WDLM",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WDLMFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WDLMFM.mp3",
-    name: "89.3 FM - East Moline",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 41.54747,
@@ -99,13 +106,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WRMBFM",
+    frequency: "89.3 FM",
+    name: "South Florida",
     callLetters: "WRMB",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WRMBFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WRMBFM.mp3",
-    name: "89.3 FM - South Florida",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 26.51796,
@@ -113,13 +121,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WGNBFM",
+    frequency: "89.3 FM",
+    name: "Zeeland",
     callLetters: "WGNB",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WGNBFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WGNBFM.mp3",
-    name: "89.3 FM - Zeeland",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 42.83721,
@@ -127,13 +136,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "MB2",
+    frequency: "89.7 FM",
+    name: "Las Cruces",
     callLetters: "KMBN",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2AAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2.mp3",
-    name: "89.7 FM - Las Cruces",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 32.2783,
@@ -141,13 +151,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WMBIFM",
+    frequency: "90.1 FM",
+    name: "Chicago",
     callLetters: "WMBI",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WMBIFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WMBIFM.mp3",
-    name: "90.1 FM - Chicago",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 41.9278,
@@ -155,13 +166,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "MB2",
+    frequency: "90.1 FM",
+    name: "Pikeville",
     callLetters: "WJSO",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2AAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2.mp3",
-    name: "90.1 FM - Pikeville",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 37.46444,
@@ -169,13 +181,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WKESFM",
+    frequency: "91.1 FM",
+    name: "St. Petersburg",
     callLetters: "WKES",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WKESFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WKESFM.mp3",
-    name: "91.1 FM - St. Petersburg",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 28.07937,
@@ -183,13 +196,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WFCMFM",
+    frequency: "91.7 FM",
+    name: "Murfreesboro",
     callLetters: "WFCM",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WFCMFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WFCMFM.mp3",
-    name: "91.7 FM - Murfreesboro",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 35.80019,
@@ -197,25 +211,27 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "MB2",
+    frequency: "950 AM",
+    name: "Charleston",
     callLetters: "WCDC",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2AAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/MB2.mp3",
-    name: "950 AM - Charleston",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
   },
   {
     tritonId: "WGNRFM",
+    frequency: "97.9 FM",
+    name: "Indianapolis",
     callLetters: "WGNR",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WGNRFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WGNRFM.mp3",
-    name: "97.9 FM - Indianapolis",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 40.06235,
@@ -223,13 +239,14 @@ export const LOCAL_STATION_DATA: Station[] = [
   },
   {
     tritonId: "WFCMFM",
+    frequency: "98.7 FM",
+    name: "Nashville",
     callLetters: "WFCM",
     logo: "https://moodybible.canto.com/direct/image/cfjcrucctd3avf20h55c5vj800/XF2jF3Eq7pyGeAUTLkEaX5Yzmz4/original?content-type=image%2Fpng&name=Moody+Radio+Network.png",
     stream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WFCMFMAAC.aac",
     fallbackstream:
       "https://playerservices.streamtheworld.com/api/livestream-redirect/WFCMFM.mp3",
-    name: "98.7 FM - Nashville",
     backgroundColor: "#74a433",
     accentColor: "#003B5C",
     lat: 35.80019,

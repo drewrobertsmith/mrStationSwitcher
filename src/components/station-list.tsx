@@ -15,6 +15,7 @@ import Animated, {
 import StationItem from "./station-item";
 import { LegendList } from "@legendapp/list";
 import { router } from "expo-router";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 type StationListType = {
   data: Station[];
@@ -53,19 +54,20 @@ function ShimmerText({ text }: { text: string }) {
   );
 }
 
-function PinIcon({ color }: { color: string }) {
+function PinButton({ color }: { color: string }) {
   return (
-    <Text style={{ fontSize: 20, color, marginRight: 4 }}>
-      {"\u{1F4CD}"}
-    </Text>
-  );
-}
-
-function ChevronDown({ color }: { color: string }) {
-  return (
-    <Text style={{ fontSize: 20, color, marginLeft: 4 }}>
-      {"\u25BE"}
-    </Text>
+    <Pressable
+      onPress={() => router.push("/local-station-picker")}
+      hitSlop={24}
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        paddingHorizontal: 4,
+      }}
+    >
+      <FontAwesome5 name="location-arrow" size={16} color={color} />
+      <Text style={{ fontSize: 10, color, marginTop: 2 }}>change</Text>
+    </Pressable>
   );
 }
 
@@ -92,7 +94,6 @@ function LocalStationHeader() {
         alignItems: "center",
       }}
     >
-      <PinIcon color={iconColor} />
       <Pressable
         onPress={() => actions.play(station)}
         onLongPress={() => actions.pause()}
@@ -108,16 +109,12 @@ function LocalStationHeader() {
           adjustsFontSizeToFit
           minimumFontScale={0.5}
         >
-          {station.name}
+          {station.frequency
+            ? `${station.frequency} - ${station.name}`
+            : station.name}
         </Text>
       </Pressable>
-      <Pressable
-        onPress={() => router.push("/local-station-picker")}
-        hitSlop={16}
-        style={{ paddingLeft: 8, justifyContent: "center" }}
-      >
-        <ChevronDown color={iconColor} />
-      </Pressable>
+      <PinButton color={iconColor} />
     </View>
   );
 }
@@ -125,7 +122,7 @@ function LocalStationHeader() {
 export default function StationList({ data }: StationListType) {
   const renderItem = useCallback(
     ({ item }: { item: Station }) => <StationItem item={item} />,
-    []
+    [],
   );
 
   return (

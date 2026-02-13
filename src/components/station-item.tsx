@@ -35,7 +35,7 @@ export default function StationItem({ item }: StationItemType) {
           ]}
           className={textColor ? undefined : "text-primary"}
         >
-          {item.name}
+          {item.frequency ? `${item.frequency} - ${item.name}` : item.name}
         </Text>
       </View>
     </Pressable>

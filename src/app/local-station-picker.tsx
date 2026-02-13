@@ -7,7 +7,7 @@ import { router } from "expo-router";
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
-type SortMode = "frequency" | "name";
+type SortMode = "frequency" | "name" | "callLetters";
 
 export default function LocalStationPicker() {
   const { station: current, setStation } = useLocalStation();
@@ -17,9 +17,13 @@ export default function LocalStationPicker() {
   const sortedStations = useMemo(() => {
     const list = [...LOCAL_STATION_DATA];
     if (sortMode === "frequency") {
-      list.sort((a, b) => parseFrequency(a.frequency) - parseFrequency(b.frequency));
-    } else {
+      list.sort(
+        (a, b) => parseFrequency(a.frequency) - parseFrequency(b.frequency),
+      );
+    } else if (sortMode === "name") {
       list.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      list.sort((a, b) => a.callLetters.localeCompare(b.callLetters));
     }
     return list;
   }, [sortMode]);
@@ -29,6 +33,18 @@ export default function LocalStationPicker() {
     router.back();
   };
 
+  const renderChoice = (mode: SortMode) => {
+    if (mode === "frequency") {
+      return "Frequency";
+    }
+    if (mode === "name") {
+      return "Name";
+    }
+    if (mode === "callLetters") {
+      return "Call Letters";
+    }
+  };
+
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
@@ -36,7 +52,7 @@ export default function LocalStationPicker() {
     >
       <View style={{ padding: 16, gap: 8 }}>
         <View style={{ flexDirection: "row", gap: 8, marginBottom: 8 }}>
-          {(["frequency", "name"] as const).map((mode) => {
+          {(["frequency", "name", "callLetters"] as const).map((mode) => {
             const active = sortMode === mode;
             return (
               <Pressable
@@ -56,7 +72,7 @@ export default function LocalStationPicker() {
                     color: active ? colors.background : colors.text,
                   }}
                 >
-                  {mode === "frequency" ? "Frequency" : "Name"}
+                  {renderChoice(mode)}
                 </Text>
               </Pressable>
             );
@@ -64,7 +80,8 @@ export default function LocalStationPicker() {
         </View>
 
         {sortedStations.map((station, index) => {
-          const isSelected = current?.tritonId === station.tritonId &&
+          const isSelected =
+            current?.tritonId === station.tritonId &&
             current?.callLetters === station.callLetters;
           const displayName = station.frequency
             ? `${station.frequency} - ${station.name}`
