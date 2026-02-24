@@ -1,43 +1,100 @@
 import { useAudio } from "@/providers/audio-provider";
+import { useSweep } from "@/providers/sweep-provider";
 import { useTheme } from "@/providers/theme-provider";
-import { stationAccentColor } from "@/utils/color";
 import { Station } from "@/types/types";
-import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { stationAccentColor } from "@/utils/color";
+import { memo, useEffect, useRef } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
+import Animated, {
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
 
 type StationItemType = {
   item: Station;
 };
 
-export default function StationItem({ item }: StationItemType) {
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
+function StationItem({ item }: StationItemType) {
   const { state, actions } = useAudio();
-  const { mode } = useTheme();
+  const { mode, colors } = useTheme();
+  const { triggerSweep } = useSweep();
 
   const isSelected = state.currentTrack?.id === item.tritonId;
-  const textColor = isSelected
+  const accentColor = item.accentColor
     ? stationAccentColor(item.accentColor, mode)
-    : undefined;
+    : colors.accent;
+
+  // Ref to measure screen position for the sweep origin
+  const viewRef = useRef<View>(null);
+
+  // Press scale
+  const pressScale = useSharedValue(1);
+  // 0 = neutral, 1 = selected accent
+  const selectionProgress = useSharedValue(isSelected ? 1 : 0);
+
+  useEffect(() => {
+    selectionProgress.value = withTiming(isSelected ? 1 : 0, { duration: 400 });
+    if (isSelected) {
+      pressScale.value = withSpring(1.02, { damping: 12, stiffness: 280 }, () => {
+        pressScale.value = withSpring(1, { damping: 14, stiffness: 200 });
+      });
+    }
+  }, [isSelected]);
+
+  const containerStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: pressScale.value }],
+  }));
+
+  const textStyle = useAnimatedStyle(() => ({
+    color: interpolateColor(
+      selectionProgress.value,
+      [0, 1],
+      [colors.text, accentColor as string],
+    ),
+  }));
+
+  const handlePress = () => {
+    // Measure the item's screen position and fire the sweep from its center
+    viewRef.current?.measure((_x, _y, _w, h, _pageX, pageY) => {
+      triggerSweep(pageY + h / 2, accentColor as string);
+    });
+    actions.play(item);
+  };
 
   return (
-    <Pressable
-      onPress={() => {
-        actions.play(item);
+    <AnimatedPressable
+      onPress={handlePress}
+      onLongPress={() => actions.pause()}
+      onPressIn={() => {
+        pressScale.value = withSpring(0.97, { damping: 15, stiffness: 400 });
       }}
-      onLongPress={() => {
-        actions.pause();
+      onPressOut={() => {
+        pressScale.value = withSpring(1, { damping: 12, stiffness: 300 });
       }}
+      style={containerStyle}
     >
-      <View style={{ padding: 8 }}>
-        <Text
-          style={[
-            { fontSize: 48, fontWeight: "600" },
-            textColor ? { color: textColor } : undefined,
-          ]}
-          className={textColor ? undefined : "text-primary"}
-        >
+      <View ref={viewRef} style={styles.container} collapsable={false}>
+        <Animated.Text style={[styles.nameText, textStyle]}>
           {item.frequency ? `${item.frequency} - ${item.name}` : item.name}
-        </Text>
+        </Animated.Text>
       </View>
-    </Pressable>
+    </AnimatedPressable>
   );
 }
+
+export default memo(StationItem);
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 8,
+  },
+  nameText: {
+    fontSize: 48,
+    fontWeight: "600",
+  },
+});

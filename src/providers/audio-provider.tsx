@@ -1,10 +1,5 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Station } from "@/types/types";
+import { stationToTrack } from "@/utils/station";
 import {
   AudioPlayer,
   AudioStatus,
@@ -12,8 +7,14 @@ import {
   useAudioPlayer,
   useAudioPlayerStatus,
 } from "expo-audio";
-import { Station } from "@/types/types";
-import { stationToTrack } from "@/utils/station";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { ColorValue } from "react-native";
 
 export interface Track {
@@ -146,28 +147,37 @@ export const AudioProvider = ({ children }: { children: React.ReactNode }) => {
     player.play();
   };
 
-  return (
-    <Audio.Provider
-      value={{
-        state: {
-          currentTrack,
-          isPlaying: status.playing,
-          isBuffering: status.isBuffering,
-        },
-        actions: {
-          play,
-          pause,
-          resume,
-        },
-        meta: {
-          player,
-          status,
-        },
-      }}
-    >
-      {children}
-    </Audio.Provider>
+  const state = useMemo(
+    () => ({
+      currentTrack,
+      isPlaying: status.playing,
+      isBuffering: status.isBuffering,
+    }),
+    [currentTrack, status.playing, status.isBuffering],
   );
+
+  const actions = useMemo(
+    () => ({
+      play,
+      pause,
+      resume,
+    }),
+    [], // These functions are stable as they don't depend on state directly (except via closures which is fine)
+  );
+
+  const contextValue = useMemo(
+    () => ({
+      state,
+      actions,
+      meta: {
+        player,
+        status,
+      },
+    }),
+    [state, actions, player, status],
+  );
+
+  return <Audio.Provider value={contextValue}>{children}</Audio.Provider>;
 };
 
 export const useAudio = () => {

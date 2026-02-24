@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
-import { Station } from "@/types/types";
 import { useNearestStation } from "@/hooks/useNearestStation";
+import { Station } from "@/types/types";
+import React, { createContext, useContext, useMemo, useState } from "react";
 
 interface LocalStationContextValue {
   station: Station | null;
@@ -21,10 +21,13 @@ export function LocalStationProvider({
   const station = override ?? nearest.station;
   const isLoading = !override && nearest.isLoading;
 
+  const value = useMemo(
+    () => ({ station, isLoading, setStation: setOverride }),
+    [station, isLoading],
+  );
+
   return (
-    <LocalStationContext.Provider
-      value={{ station, isLoading, setStation: setOverride }}
-    >
+    <LocalStationContext.Provider value={value}>
       {children}
     </LocalStationContext.Provider>
   );

@@ -1,7 +1,7 @@
 import { useTabBarHeight } from "@/providers/tabBarHeight-provider";
 import { BottomTabBar, BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useCallback } from "react";
-import { LayoutChangeEvent, View } from "react-native";
+import { LayoutChangeEvent, StyleSheet, View } from "react-native";
 import { useBottomTabBarHeight } from "react-native-bottom-tabs";
 
 // This component is a bottom tab bar that reports the tabBarHeight from the native layout event up to a context so the sibling player component can consume the tab height even when outside the tab tree. This works becasue onLayout fires asynchronously AFTER the yoga layout engine calculates the position and size of the view, but BEFORE painting to the screen
@@ -33,8 +33,14 @@ export default function HeightAwareTabBar(props: BottomTabBarProps) {
   );
 
   return (
-    <View onLayout={handleLayout}>
+    <View onLayout={handleLayout} style={styles.container}>
       <BottomTabBar {...props} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    // Ensuring the layout container doesn't accidentally collapse or interfere
+  },
+});
